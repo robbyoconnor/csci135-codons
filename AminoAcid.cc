@@ -10,6 +10,7 @@ Modifications:
 using namespace std;
 
 AminoAcid::AminoAcid(){
+    // do nothing.
 }
 
 AminoAcid::AminoAcid(string name, string threeLetterName, string molecularFormula, vector<string> codons) {
