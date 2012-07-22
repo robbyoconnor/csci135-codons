@@ -1,110 +1,99 @@
-Phenylalanine
-	Three-letter name: Phe
-	Molar mass: 165.19 g/mol
-	Codons: UUU UUC
-
-Leucine
-	Three-letter name: Leu
-	Molar mass:  131.17 g/mol
-	Codons: UUA UUG CUU CUC CUA CUG
-
-Serine
-	Three-letter name: Ser
-	Molar mass:  105.09 g/mol
-	Codons: UCU UCC UCA UCG
-
-Tyrosine
-	Three-letter name: Tyr
-	Molar mass: 181.19 g/mol
-	Codons: UAU UAC
-
-Cysteine
-	Three-letter name: Cys
-	Molar mass: 121.16 g/mol
-	Codons: UGU UGC
-
-Tryptophan
-	Three-letter name: Trp
-	Molar mass: 204.23 g/mol
-	Codons: UGG
-
-Proline
-	Three-letter name: Pro
-	Molar mass: 115.13 g/mol
-	Codons: CCU CCC CCA CCG
-
-Histidine
-	Three-letter name: His
-	Molar mass: 155.16 g/mol
-	Codons: CAU CAC
-
-Glutamine
-	Three-letter name: Gln
-	Molar mass: 146.15 g/mol
-	Codons: CAA CAG
+Alanine
+	Three-letter name: Ala
+	Molar mass: 89.09 g/mol
+	Codons: GCU GCC GCA GCG
 
 Arginine
 	Three-letter name: Arg
 	Molar mass: 174.20 g/mol
-	Codons: CGU CGC CGA CGG
-
-Isoleucine
-	Three-letter name: Ile
-	Molar mass: 131.17 g/mol
-	Codons: AUU AUC AUA
-
-Methionine
-	Three-letter name: Met
-	Molar mass: 149.21 g/mol
-	Codons: AUG
-
-Threonine
-	Three-letter name: Thr
-	Molar mass: 119.12 g/mol
-	Codons: ACU ACC ACA ACG
+	Codons: CGU CGC CGA CGG AGA AGG
 
 Asparagine
 	Three-letter name: Asn
 	Molar mass: 132.12 g/mol
 	Codons: AAU AAC
 
-Lysine
-	Three-letter name: Lys
-	Molar mass: 146.19 g/mol
-	Codons: AAA AAG
-
-Serine
-	Three-letter name: Ser
-	Molar mass: 105.09 g/mol
-	Codons: AGU AGC
-
-Arginine
-	Three-letter name: Arg
-	Molar mass: 174.20 g/mol
-	Codons: AGA AGG
-
-Valine
-	Three-letter name: Val
-	Molar mass: 117.15 g/mol
-	Codons: GUU GUC GUA GUG
-
-Alanine
-	Three-letter name: Ala
-	Molar mass: 89.09 g/mol
-	Codons: GCU GCC GCA GCG
-
 Aspartate
 	Three-letter name: Asp
 	Molar mass: 133.10 g/mol
 	Codons: GAU GAC
+
+Cysteine
+	Three-letter name: Cys
+	Molar mass: 121.16 g/mol
+	Codons: UGU UGC
 
 Glutamate
 	Three-letter name: Glu
 	Molar mass: 147.13 g/mol
 	Codons: GAA GAG
 
+Glutamine
+	Three-letter name: Gln
+	Molar mass: 146.15 g/mol
+	Codons: CAA CAG
+
 Glycine
 	Three-letter name: Gly
 	Molar mass: 75.07 g/mol
 	Codons: GGU GGC GGA GGG
 
+Histidine
+	Three-letter name: His
+	Molar mass: 155.16 g/mol
+	Codons: CAU CAC
+
+Isoleucine
+	Three-letter name: Ile
+	Molar mass: 131.17 g/mol
+	Codons: AUU AUC AUA
+
+Leucine
+	Three-letter name: Leu
+	Molar mass:  131.17 g/mol
+	Codons: UUA UUG CUU CUC CUA CUG
+
+Lysine
+	Three-letter name: Lys
+	Molar mass: 146.19 g/mol
+	Codons: AAA AAG
+
+Methionine
+	Three-letter name: Met
+	Molar mass: 149.21 g/mol
+	Codons: AUG
+
+Phenylalanine
+	Three-letter name: Phe
+	Molar mass: 165.19 g/mol
+	Codons: UUU UUC
+
+Proline
+	Three-letter name: Pro
+	Molar mass: 115.13 g/mol
+	Codons: CCU CCC CCA CCG
+
+Serine
+	Three-letter name: Ser
+	Molar mass: 105.09 g/mol
+	Codons: UCU UCC UCA UCG AGU AGC
+
+Threonine
+	Three-letter name: Thr
+	Molar mass: 119.12 g/mol
+	Codons: ACU ACC ACA ACG
+
+Tryptophan
+	Three-letter name: Trp
+	Molar mass: 204.23 g/mol
+	Codons: UGG
+
+Tyrosine
+	Three-letter name: Tyr
+	Molar mass: 181.19 g/mol
+	Codons: UAU UAC
+
+Valine
+	Three-letter name: Val
+	Molar mass: 117.15 g/mol
+	Codons: GUU GUC GUA GUG
