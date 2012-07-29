@@ -16,7 +16,7 @@ AminoAcid::AminoAcid(){
 AminoAcid::AminoAcid(string name, string threeLetterName, string molecularFormula, vector<string> codons) {
     this->name = name;
     this->threeLetterName = threeLetterName;
-    this->molecularFormula = molecularFormula;
+    this->molarMass = molecularFormula;
     this->codons = codons;
 }
 
@@ -36,12 +36,12 @@ void AminoAcid::setThreeLetterName(string threeLetterName) {
     this->threeLetterName = threeLetterName;
 }
 
-string AminoAcid::getMolecularFormula() {
-    return this->molecularFormula;
+string AminoAcid::getMolarMass() {
+    return this->molarMass;
 }
 
-void AminoAcid::setMolecularFormula(string molecularFormula) {
-    this->molecularFormula = molecularFormula;
+void AminoAcid::getMolarMass(string molecularFormula) {
+    this->molarMass = molecularFormula;
 }
 
 vector<string> AminoAcid::getCodons() {

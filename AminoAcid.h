@@ -31,8 +31,11 @@ class AminoAcid{
      */
     std::string getThreeLetterName();
 
-    //TODO: document
-    std::string getMolecularFormula();
+    /**
+     * Returns the molar mass of the given amino acid
+     * @return the molar mass in units: g/mol
+     */
+    std::string getMolarMass();
 
     /**
      * Returns a vector containing the codon(s) for this amino acid.
@@ -54,8 +57,11 @@ class AminoAcid{
      */
     void setThreeLetterName(std::string threeLetterName);
 
-    //TODO: document
-    void setMolecularFormula(std::string molecularFormula);
+    /**
+     * Sets the molar mass.
+     * Units: g/mol     *
+     */
+    void getMolarMass(std::string molarMass);
 
     /**
      * Set the codon(s) for the amino acid
@@ -67,7 +73,7 @@ class AminoAcid{
   private:
     std::string name;
     std::string threeLetterName;
-    std::string molecularFormula;
+    std::string molarMass;
     std::vector<std::string> codons;
 
 };
