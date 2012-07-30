@@ -76,7 +76,7 @@ void displayMenu(bool& done) {
 			string sequence = "", complement = "";
 			promptPalindromicSequence(sequence);
 			cout << "\nThe sequence \""
-				<<"5'-"<<sequence<<"-3'"
+				<<"5'-"<<sequence<<"-3'\""
 				<< " and its complement \""
 				<< "3'-"<<getComplement(sequence)<<"-5'"
 				<< "\" ";
