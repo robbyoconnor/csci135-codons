@@ -11,7 +11,6 @@
 
 #include <iostream>
 
-
 using namespace std;
 
 // function protoypes
@@ -39,18 +38,12 @@ int main(int argc, char* argv[]) {
  * @param done passed by reference, acts as the sentinel value..
  */
 void displayMenu(bool& done) {
-	cout << "\nWelcome! This program will:\n"
-		<< endl;
-	cout << "1. Find the Phylogenetic Distance of two equally sized DNA strands"
-		<< endl;
-	cout << "2. Determine if a sequence of nucleotides is palindromic"
-		<< endl;
-	cout << "3. Transcribe a DNA sequence to RNA"
-		<< endl;
-	cout << "4. Output the Amino Acids represented by each codon in the RNA"
-		<< endl;
-	cout << "------------------------------------------------------------------"
-		<< endl;
+	cout << "\nWelcome! This program will:\n" << endl;
+	cout << "1. Find the Phylogenetic Distance of two equally sized DNA strands" << endl;
+	cout << "2. Determine if a sequence of nucleotides is palindromic" << endl;
+	cout << "3. Transcribe a DNA sequence to RNA" << endl;
+	cout << "4. Output the Amino Acids represented by each codon in the RNA" << endl;
+	cout << "------------------------------------------------------------------" << endl;
 
 	cout << "Make a selection (enter \"0\" (without quotes) to quit.): ";
 	int choice;
@@ -63,29 +56,19 @@ void displayMenu(bool& done) {
 			string sequence1, sequence2;
 			promptPhylogeneticDistanceInput(sequence1, sequence2);
 			//output it.
-			cout << "Phylogenetic sequence of \""
-				<< sequence1
-				<< "\" and  \""
-				<< sequence2
-				<< "\" is: ";
-			cout << getPhylogeneticDistance(sequence1, sequence2)
-				<< endl;
+			cout << "Phylogenetic sequence of \"" << sequence1 << "\" and  \"" << sequence2 << "\" is: ";
+			cout << getPhylogeneticDistance(sequence1, sequence2) << endl;
 			break;
 		}
 		case 2: {
 			string sequence = "", complement = "";
 			promptPalindromicSequence(sequence);
-			cout << "\nThe sequence \""
-				<<"5'-"<<sequence<<"-3'\""
-				<< " and its complement \""
-				<< "3'-"<<getComplement(sequence)<<"-5'"
-				<< "\" ";
+			cout << "\nThe sequence \"" << "5'-" << sequence << "-3'\"" << " and its complement \"" << "3'-" << getComplement(
+					sequence) << "-5'" << "\" ";
 			if (isPalindromicSequence(sequence)) {
-				cout << "is palindromic."
-					<< endl;
+				cout << "is palindromic." << endl;
 			} else {
-				cout << "is not palindromic."
-					<< endl;
+				cout << "is not palindromic." << endl;
 			}
 			break;
 		}
@@ -96,8 +79,7 @@ void displayMenu(bool& done) {
 			//TODO: complete this
 			break;
 		default:
-			cout << "Invalid input! please choose only numbers between 0 and 4! "
-				<< endl;
+			cout << "Invalid input! please choose only numbers between 0 and 4! " << endl;
 			cout << "Please make a selection: ";
 			cin >> choice;
 			break;
@@ -108,14 +90,9 @@ void displayMenu(bool& done) {
  * @param sequence a reference to the sequence.
  */
 void promptPalindromicSequence(string &sequence) {
-	cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required."
-		<< endl
-		<< "The constraints are as follows: "
-		<< endl;
-	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)."
-		<< endl;
-	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n"
-		<< endl;
+	cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required." << endl << "The constraints are as follows: " << endl;
+	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)." << endl;
+	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n" << endl;
 	cout << "Please enter the DNA sequence (no spaces, all on one line): ";
 	cin >> sequence;
 	validateDNASequence(sequence);
@@ -177,15 +154,9 @@ string getComplement(string sequence) {
  *
  */
 void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
-	cout << "\nTo calculate the phylogentic distance, you will be required"
-		<< " to enter two DNA sequences."
-		<< endl
-		<< "The constraints are as follows: "
-		<< endl;
-	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).\n\n"
-		<< endl;
-	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n"
-		<< endl;
+	cout << "\nTo calculate the phylogentic distance, you will be required" << " to enter two DNA sequences." << endl << "The constraints are as follows: " << endl;
+	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).\n\n" << endl;
+	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n" << endl;
 
 	cout << "Please enter the first sequemce (with no spaces and all on one line): ";
 	cin >> sequence1;
@@ -195,8 +166,7 @@ void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
 	cin >> sequence2;
 	validateDNASequence(sequence2);
 	while (sequence1.size() != sequence2.size()) {
-		cout << "\nThe two sequences must be of equal length."
-			<< endl;
+		cout << "\nThe two sequences must be of equal length." << endl;
 		cout << "Please enter the first sequemce (with no spaces and all on one line): ";
 		cin >> sequence1;
 		// first sequence validation.
@@ -351,7 +321,6 @@ void help(int selection) {
  * @param err the error message to print.
  */
 void printMessage(string err) {
-	cout << err
-		<< endl;
+	cout << err << endl;
 	return;
 }
