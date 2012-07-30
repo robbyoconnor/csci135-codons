@@ -11,6 +11,7 @@
 
 #include <iostream>
 
+
 using namespace std;
 
 // function protoypes
@@ -75,9 +76,9 @@ void displayMenu(bool& done) {
 			string sequence = "", complement = "";
 			promptPalindromicSequence(sequence);
 			cout << "\nThe sequence \""
-				<< sequence
+				<<"5'-"<<sequence<<"-3'"
 				<< " and its complement \""
-				<< getComplement(sequence)
+				<< "3'-"<<getComplement(sequence)<<"-5'"
 				<< "\" ";
 			if (isPalindromicSequence(sequence)) {
 				cout << "is palindromic."
