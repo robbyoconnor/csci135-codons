@@ -29,6 +29,7 @@ class RNATranscriber {
 
 		/**
 		 * Transcribes the DNA sequence to RNA.
+		 * Case is considered for the sake of consistency. T->U and t->u.
 		 */
 		void transcribe();
 
