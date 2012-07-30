@@ -10,21 +10,10 @@
  *******************************************************************************/
 
 #include <iostream>
+#include "main.h"
 
 using namespace std;
 
-// function protoypes
-void displayMenu(bool &done);
-void help(int selection);
-
-bool isValidDNASequence(string sequence);
-void validateDNASequence(string &sequence);
-void printMessage(string err);
-void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2);
-int getPhylogeneticDistance(string dnaSequence1, string dnaSequence2);
-void promptPalindromicSequence(string &sequence);
-bool isPalindromicSequence(string dnaSequence);
-string getComplement(string sequence);
 
 int main(int argc, char* argv[]) {
 	bool done = false;
@@ -33,10 +22,7 @@ int main(int argc, char* argv[]) {
 	} while (!done);
 }
 
-/**
- * Displays the menu, processes user choices and sets the sentinel value to false/
- * @param done passed by reference, acts as the sentinel value..
- */
+
 void displayMenu(bool& done) {
 	cout << "\nWelcome! This program will:\n" << endl;
 	cout << "1. Find the Phylogenetic Distance of two equally sized DNA strands" << endl;
@@ -85,10 +71,7 @@ void displayMenu(bool& done) {
 			break;
 	}
 }
-/**
- * Prompt for checking for a Palindromic sequence
- * @param sequence a reference to the sequence.
- */
+
 void promptPalindromicSequence(string &sequence) {
 	cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required." << endl << "The constraints are as follows: " << endl;
 	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)." << endl;
@@ -98,15 +81,7 @@ void promptPalindromicSequence(string &sequence) {
 	validateDNASequence(sequence);
 }
 
-/**
- * Determines if a sequence of nucleotides is palindromic.
- * Pre-condition: valid sequence is passed...we know it is valid because it is checked long before it is passed.
- * Post-condition: a complement string (that is passed as an empty string by reference,
- * now contains the complementary sequence.
- * @param dnaSequence
- * @param complement used to pass back for display to the user.
- * @return true if the complement of the sequence is a palindrome, false otherwise.
- */
+
 bool isPalindromicSequence(string sequence) {
 	// first we need to find the complement.
 	string complement = getComplement(sequence);
@@ -114,13 +89,7 @@ bool isPalindromicSequence(string sequence) {
 	return complement == reversed;
 }
 
-/**
- * Gets the complement for a given DNA sequence.
- * Wherein substitution will occur as follows: A=T, T=A, G=C, C=G.
- * Case is taken into consideration, that is: a!=A, this allows for consistency.
- * @param sequence the sequence
- * @return the complement of the given sequence.
- */
+
 string getComplement(string sequence) {
 	string complement = sequence;
 	unsigned int i = 0;
@@ -145,14 +114,7 @@ string getComplement(string sequence) {
 	}
 	return complement;
 }
-/**
- * Prompt for phylogenetic distance.
- * Pre-condition: the two sequences are passed by reference
- * Post-condition: the inputs are stored in the reference passed.
- * @param sequence1 the first sequence
- * @param sequenc2 the second sequence
- *
- */
+
 void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
 	cout << "\nTo calculate the phylogentic distance, you will be required" << " to enter two DNA sequences." << endl << "The constraints are as follows: " << endl;
 	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).\n\n" << endl;
@@ -177,13 +139,7 @@ void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
 		validateDNASequence(sequence2);
 	}
 }
-/**
- * Calculates and returns the phylogenetic distance
- * Pre-condition: the two stands must be of equal length; less than or equal to 30 letters; and only contain the letters a,c,g and t.
- * @param dnaSequence1 the first sequence
- * @param dnaSequence2 the second sequence
- * @return -1 if not equal or the the phylogenetic distance of the two sequences.
- */
+
 int getPhylogeneticDistance(string dnaSequence1, string dnaSequence2) {
 	int numDifferent = 0; // this will increment as we find different values.
 
@@ -201,11 +157,7 @@ int getPhylogeneticDistance(string dnaSequence1, string dnaSequence2) {
 	return numDifferent / dnaSequence1.size();
 }
 
-/**
- * Utility function to check if the DNA sequence is valid or not.
- * @param sequence the DNA sequence
- * @return true if all characters contained in the string  are a, c, g, or t otherwise false
- */
+
 bool isValidDNASequence(string sequence) {
 	// squashes the warning: "comparison between signed and unsigned integer expressions"
 	unsigned int i = 0;
@@ -226,14 +178,7 @@ bool isValidDNASequence(string sequence) {
 	return true;
 }
 
-/**
- * Validates the DNA Sequence for both size and its properties which state it may only contain the letters: a,c,g and t.
- *
- * Pre-condition: dnaSequence is passed by reference
- * Post-condition: the valid DNA string is stored in the reference passed to this function.
- * @param dnaSequence the sequence to be checked
- *
- */
+
 void validateDNASequence(string &dnaSequence) {
 	// allows for me to more precisely determine what isn't valid.
 	bool tooBig = dnaSequence.size() > 30;
@@ -311,15 +256,6 @@ void validateDNASequence(string &dnaSequence) {
 	return;
 }
 
-void help(int selection) {
-}
-
-/**
- * Prints out validation errors to the screen.
- *
- * Used by validateDNASequence().
- * @param err the error message to print.
- */
 void printMessage(string err) {
 	cout << err << endl;
 	return;
