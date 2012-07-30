@@ -10,7 +10,9 @@
  *******************************************************************************/
 
 #include <iostream>
+
 #include "main.h"
+#include "RNATranscriber.h"
 
 using namespace std;
 
@@ -48,7 +50,8 @@ void displayMenu(bool& done) {
 		}
 		case 2: {
 			string sequence = "", complement = "";
-			promptPalindromicSequence(sequence);
+			cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required." << endl << "The constraints are as follows: " << endl;
+			promptForDNASequence(sequence);
 			cout << "\nThe sequence \"" << "5'-" << sequence << "-3'\"" << " and its complement \"" << "3'-" << getComplement(
 					sequence) << "-5'" << "\" ";
 			if (isPalindromicSequence(sequence)) {
@@ -58,9 +61,15 @@ void displayMenu(bool& done) {
 			}
 			break;
 		}
-		case 3:
-			//TODO: complete this
+		case 3: {
+			cout<<"You have chosen to transcribe a DNA sequence to an RNA sequence.\n"<<endl;
+			string sequence = "";
+			promptForDNASequence(sequence);
+			RNATranscriber transcriber(sequence);
+			transcriber.transcribe();
+			cout<<"\n\nThe DNA Sequence \""<<sequence<<"\" transcribed to RNA is \""<<transcriber.getRNASequence()<<".\""<<endl;
 			break;
+		}
 		case 4:
 			//TODO: complete this
 			break;
@@ -72,15 +81,14 @@ void displayMenu(bool& done) {
 	}
 }
 
-void promptPalindromicSequence(string &sequence) {
-	cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required." << endl << "The constraints are as follows: " << endl;
+void promptForDNASequence(string &sequence) {
+	cout<<"Ensure that your DNA sequence follows the following rules:"<<endl;
 	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)." << endl;
 	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n" << endl;
 	cout << "Please enter the DNA sequence (no spaces, all on one line): ";
 	cin >> sequence;
 	validateDNASequence(sequence);
 }
-
 
 bool isPalindromicSequence(string sequence) {
 	// first we need to find the complement.

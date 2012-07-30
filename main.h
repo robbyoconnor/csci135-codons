@@ -62,10 +62,10 @@ void promptPhylogeneticDistanceInput(std::string &sequence1, std::string &sequen
 int getPhylogeneticDistance(std::string dnaSequence1, std::string dnaSequence2);
 
 /**
- * Prompt for checking for a Palindromic sequence
+ * Prompt for DNA sequence.
  * @param sequence a reference to the sequence.
  */
-void promptPalindromicSequence(std::string &sequence);
+void promptForDNASequence(std::string &sequence);
 
 /**
  * Determines if a sequence of nucleotides is palindromic.
