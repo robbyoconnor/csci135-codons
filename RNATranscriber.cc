@@ -10,10 +10,10 @@ Modifications:
 using namespace std;
 
 RNATranscriber::RNATranscriber(){
+	// this page intentionally left blank.
 }
 
-RNATranscriber::RNATranscriber(string dnaSequence) {
-	this->dnaSequence = dnaSequence;
+RNATranscriber::RNATranscriber(const string dnaSequence):dnaSequence(dnaSequence) {
 }
 
 string RNATranscriber::getRNASequence() {

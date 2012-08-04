@@ -7,24 +7,28 @@ Modifications:
 *******************************************************************************/
 #include "AminoAcid.h"
 #include <vector>
+#include <string>
+#include <iostream>
+#include <cctype>
+#include <cstring>
 using namespace std;
+
 
 AminoAcid::AminoAcid(){
     // do nothing.
 }
 
-AminoAcid::AminoAcid(string name, string threeLetterName, string molecularFormula, vector<string> codons) {
-    this->name = name;
-    this->threeLetterName = threeLetterName;
-    this->molarMass = molecularFormula;
-    this->codons = codons;
+AminoAcid::AminoAcid(const string name, const string threeLetterName, const double molarMass, const vector<string> codons):
+		name(name),threeLetterName(threeLetterName),
+		molarMass(molarMass),codons(codons){
+	// this page left blank intentionally.
 }
 
 string AminoAcid::getName() {
     return this->name;
 }
 
-void AminoAcid::setName(string name) {
+void AminoAcid::setName(const string name) {
     this->name = name;
 }
 
@@ -32,22 +36,22 @@ string AminoAcid::getThreeLetterName() {
     return this->threeLetterName;
 }
 
-void AminoAcid::setThreeLetterName(string threeLetterName) {
+void AminoAcid::setThreeLetterName(const string threeLetterName) {
     this->threeLetterName = threeLetterName;
 }
 
-string AminoAcid::getMolarMass() {
+double AminoAcid::getMolarMass() {
     return this->molarMass;
 }
 
-void AminoAcid::getMolarMass(string molecularFormula) {
-    this->molarMass = molecularFormula;
+void AminoAcid::getMolarMass(const double molarMass) {
+    this->molarMass = molarMass;
 }
 
 vector<string> AminoAcid::getCodons() {
     return this->codons;
 }
 
-void AminoAcid::setCodons(vector<string> codons) {
+void AminoAcid::setCodons(const vector<string> codons) {
     this->codons = codons;
 }

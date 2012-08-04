@@ -15,7 +15,7 @@ class AminoAcid{
     AminoAcid();
 
     // allows for easy initialization of all class members
-    AminoAcid(std::string name, std::string threeLetterName, std::string molecularFormula, std::vector<std::string> codons);
+    AminoAcid(const std::string name, const std::string threeLetterName, const double molarMass, const std::vector<std::string> codons);
 
     // accessor functions
 
@@ -35,7 +35,7 @@ class AminoAcid{
      * Returns the molar mass of the given amino acid
      * @return the molar mass in units: g/mol
      */
-    std::string getMolarMass();
+    double getMolarMass();
 
     /**
      * Returns a vector containing the codon(s) for this amino acid.
@@ -49,31 +49,30 @@ class AminoAcid{
      * Set the amino acid name
      * @param name the name
      */
-    void setName(std::string name);
+    void setName(const std::string name);
 
     /**
      * Set the three leter name for the amino acid
      * @param threeLetterName the three letter name
      */
-    void setThreeLetterName(std::string threeLetterName);
+    void setThreeLetterName(const std::string threeLetterName);
 
     /**
      * Sets the molar mass.
      * Units: g/mol     *
      */
-    void getMolarMass(std::string molarMass);
+    void getMolarMass(const double molarMass);
 
     /**
      * Set the codon(s) for the amino acid
      * @param codons the codons for this amino acid.
      */
-    void setCodons(std::vector<std::string> codons);
-
+    void setCodons(const std::vector<std::string> codons);
 
   private:
     std::string name;
     std::string threeLetterName;
-    std::string molarMass;
+    double molarMass;
     std::vector<std::string> codons;
 
 };

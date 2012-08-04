@@ -13,6 +13,7 @@
 
 #include "main.h"
 #include "RNATranscriber.h"
+#include "RNATranslator.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ void displayMenu(bool& done) {
 	cout << "1. Find the Phylogenetic Distance of two equally sized DNA strands" << endl;
 	cout << "2. Determine if a sequence of nucleotides is palindromic" << endl;
 	cout << "3. Transcribe a DNA sequence to RNA" << endl;
-	cout << "4. Output the Amino Acids represented by each codon in the RNA" << endl;
+	cout << "4. Output the Amino Acids represented by each codon in the RNA (from DNA entered)" << endl;
 	cout << "------------------------------------------------------------------" << endl;
 
 	cout << "Make a selection (enter \"0\" (without quotes) to quit.): ";
@@ -70,14 +71,28 @@ void displayMenu(bool& done) {
 			cout<<"\n\nThe DNA Sequence \""<<sequence<<"\" transcribed to RNA is \""<<transcriber.getRNASequence()<<".\""<<endl;
 			break;
 		}
-		case 4:
-			//TODO: complete this
+		case 4: {
+			cout<<"\nAmino Acids will be extracted from an RNA sequence that will be transcribed from a DNA sequence entered.\n"<<endl;
+			cout<<"It will display: it in the following format: "<<endl;
+			cout<<"Protein name: Methionine (Met)"<<endl;
+			cout<<"Molar mass: 149.21"<<endl;
+			cout<<"The sequence you entered is encoded as: Met-Val-Tyr-Gly-Leu\n\n"<<endl;
+			string sequence = "";
+			promptForDNASequence(sequence);
+			RNATranscriber transcriber(sequence);
+			transcriber.transcribe();
+			RNATranslator translator(transcriber);
+			translator.processInputFile("a2-codons.txt");
+			vector<string> codons = translator.processSequence();
+			translator.printAminoAcids(codons);
 			break;
-		default:
+		}
+		default: {
 			cout << "Invalid input! please choose only numbers between 0 and 4! " << endl;
 			cout << "Please make a selection: ";
 			cin >> choice;
 			break;
+		}
 	}
 }
 
