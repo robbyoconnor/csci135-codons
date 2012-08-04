@@ -53,7 +53,7 @@ void RNATranslator::printAminoAcids(vector<string> codons) {
 		// check if iter exists first.
 		map<string, AminoAcid>::iterator iter = this->aminoAcidsMap.find(codon);
 		if (iter != this->aminoAcidsMap.end()) {
-			// okay iter exists...this now returns a pair<string,AminoAcid>.
+			// okay it exists...this now returns a pair<string,AminoAcid>.
 			// we can count on this so we return it.
 			AminoAcid acid = iter->second;
 			cout << "Amino acid name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
