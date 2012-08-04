@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <cstring>
+#include <sstream>
 #include <algorithm>
 #include<map>
 
@@ -56,7 +57,7 @@ void RNATranslator::printAminoAcids(vector<string> codons) {
 			// okay it exists...this now returns a pair<string,AminoAcid>.
 			// we can count on this so we return it.
 			AminoAcid acid = it->second;
-			cout << "Protein name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
+			cout << "Amino acid name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
 			cout << "Molar Mass of " << acid.getThreeLetterName() << ": " << acid.getMolarMass()<<" g/mol\n" << endl;
 			sequence += acid.getThreeLetterName()+"-";
 		} else {
@@ -83,12 +84,10 @@ bool RNATranslator::processInputFile(const std::string fileName) {
 			getline(input, line); // contains g/mol -- we don't care.
 			getline(input, line); // contains what we want.
 			line.replace(0, 9, ""); // get rid of "Codons: " (note the white space).
-			char s[line.length()]; // create a c string
-			strcpy(s, line.c_str()); // copy the c string variant of the line.
-			char *tok = strtok(s, " "); // tokenize e.g., "GCU GCC GCA GCG" -> "GCU",'GCC","GCA","GCG" etc...
-			while (tok != NULL) {
-				codons.push_back(tok); // push it onto the vector
-				tok = strtok(NULL, " ");
+			stringstream ss(line);
+			string token;
+			while (ss >> token) {
+				codons.push_back(token); // push it onto the vector
 			}
 			AminoAcid acid(longName, threeLetterName, molarMass, codons);
 			// iterate through the codons array and add them to map which will be used for lookups.
