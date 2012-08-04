@@ -6,11 +6,8 @@ Description: Represents an Amino Acid
 Modifications:
 *******************************************************************************/
 #include "AminoAcid.h"
-#include <vector>
 #include <string>
 #include <iostream>
-#include <cctype>
-#include <cstring>
 using namespace std;
 
 

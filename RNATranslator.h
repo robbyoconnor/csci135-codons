@@ -22,7 +22,7 @@ class RNATranslator{
     RNATranslator(const RNATranscriber rnaTranscriber);
 
     /**
-     * Processes the sequence reading the codons and outputting the amino acids associated.
+     * Processes the sequence reading the codons.
      * Pre-condition: It is assumed that it is a valid RNA sequence (e.g., thymine base has been converted to uracil.)
      * Post-condition: adds all codons found to a vector and returns it.
      * @return a vector containing all the codons.
@@ -32,7 +32,7 @@ class RNATranslator{
     /**
      * Determines all the amino acids.
      * @param codons the codons as parsed by processSequence().
-     * @param position
+     *
      */
     void printAminoAcids(std::vector<std::string> codons);
 
