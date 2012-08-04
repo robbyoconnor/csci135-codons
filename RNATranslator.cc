@@ -9,7 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
 #include <sstream>
 #include <algorithm>
 #include<map>
@@ -51,12 +50,12 @@ void RNATranslator::printAminoAcids(vector<string> codons) {
 	cout << "The following proteins are encoded by the RNA sequence you entered:\n"<<endl;
 	for(int i = 0;i < codons.size();i++) {
 		string codon = codons[i];
-		// check if it exists first.
-		map<string, AminoAcid>::iterator it = this->aminoAcidsMap.find(codon);
-		if (it != this->aminoAcidsMap.end()) {
-			// okay it exists...this now returns a pair<string,AminoAcid>.
+		// check if iter exists first.
+		map<string, AminoAcid>::iterator iter = this->aminoAcidsMap.find(codon);
+		if (iter != this->aminoAcidsMap.end()) {
+			// okay iter exists...this now returns a pair<string,AminoAcid>.
 			// we can count on this so we return it.
-			AminoAcid acid = it->second;
+			AminoAcid acid = iter->second;
 			cout << "Amino acid name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
 			cout << "Molar Mass of " << acid.getThreeLetterName() << ": " << acid.getMolarMass()<<" g/mol\n" << endl;
 			sequence += acid.getThreeLetterName()+"-";
