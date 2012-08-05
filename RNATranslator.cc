@@ -26,7 +26,7 @@ vector<string> RNATranslator::processSequence() {
 	string rna = transcriber.getRNASequence();
 	string codon;
 	vector<string> codons;
-	int i = 0;
+
 	/* Take substrings of three characters at a time
 	 * push them onto a vector and then remove those three characters
 	 * do this until the string is empty.
@@ -34,12 +34,12 @@ vector<string> RNATranslator::processSequence() {
 	 * since the requirement that the length always be a multiple of 3
 	 * this code will always work.
 	 */
-	while (i < 2 && !rna.empty()) {
-		codon = rna.substr(i, i + 3);
-		// this makes it easier when translating...the user need not be concerned
+	while (!rna.empty()) {
+		codon = rna.substr(0, 3); // codon....
+		// this makes it easier when translating...since the codons are uppercase.
 		transform(codon.begin(), codon.end(), codon.begin(), ::toupper);
 		codons.push_back(codon);
-		rna.replace(i, i + 3, "");
+		rna.replace(0, 3, ""); // remove the codon...
 	}
 
 	return codons;
@@ -47,18 +47,17 @@ vector<string> RNATranslator::processSequence() {
 
 void RNATranslator::printAminoAcids(vector<string> codons) {
 	string sequence;
-	cout << "The following proteins are encoded by the RNA sequence you entered:\n"<<endl;
+	cout << "The following proteins are encoded by the RNA sequence you entered:\n" << endl;
 	for(int i = 0;i < codons.size();i++) {
 		string codon = codons[i];
 		// check if iter exists first.
 		map<string, AminoAcid>::iterator iter = this->aminoAcidsMap.find(codon);
 		if (iter != this->aminoAcidsMap.end()) {
 			// okay it exists...this now returns a pair<string,AminoAcid>.
-			// we can count on this so we return it.
 			AminoAcid acid = iter->second;
 			cout << "Amino acid name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
-			cout << "Molar Mass of " << acid.getThreeLetterName() << ": " << acid.getMolarMass()<<" g/mol\n" << endl;
-			sequence += acid.getThreeLetterName()+"-";
+			cout << "Molar Mass of " << acid.getThreeLetterName() << ": " << acid.getMolarMass() << " g/mol\n" << endl;
+			sequence += acid.getThreeLetterName() + "-";
 		} else {
 			cout << "***Stop Codon encountered***" << endl;
 
@@ -75,13 +74,13 @@ bool RNATranslator::processInputFile(const std::string fileName) {
 	vector<string> codons;
 	if (input.is_open()) {
 		while (input.good()) {
-			codons.clear(); // we need to clear it...
-			input >> longName; // grab the first line since we know it's the name...
+			codons.clear(); // clear it...only want codons for that Amino acid..
+			input >> longName; // grab the first line since it is known  that it's the name wanted..
 			input >> threeLetterName >> threeLetterName >> threeLetterName;
 			input >> trash >> trash >> molarMass;
 			string line;
-			getline(input, line); // contains g/mol -- we don't care.
-			getline(input, line); // contains what we want.
+			getline(input, line); // contains g/mol -- don't care.
+			getline(input, line); // contains what I want.
 			line.replace(0, 9, ""); // get rid of "Codons: " (note the white space).
 			stringstream ss(line);
 			string token;
