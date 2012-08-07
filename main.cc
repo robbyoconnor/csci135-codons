@@ -4,12 +4,13 @@
  Created on: July 22, 2012
  Description: Entry point for the application which transcribes a DNA strand
  to an RNA strand and provides for some other handy things.
- Usage: codons
+ Usage: make (will botb build and run).
  Build with: make
  Modifications:
  *******************************************************************************/
 
 #include <iostream>
+#include <iomanip>
 
 #include "main.h"
 #include "RNATranscriber.h"
@@ -17,14 +18,12 @@
 
 using namespace std;
 
-
 int main(int argc, char* argv[]) {
 	bool done = false;
 	do {
 		displayMenu(done);
 	} while (!done);
 }
-
 
 void displayMenu(bool& done) {
 	cout << "\nWelcome! This program will:\n" << endl;
@@ -34,49 +33,59 @@ void displayMenu(bool& done) {
 	cout << "4. Output the Amino Acids represented by each codon in the RNA (from DNA entered)" << endl;
 	cout << "------------------------------------------------------------------" << endl;
 
-	cout << "Make a selection (enter \"0\" (without quotes) to quit.): ";
-	int choice;
+	cout << "Make a selection (enter \"0\", \"q\" or \"Q\" (without quotes) to quit.): ";
+	char choice;
 	cin >> choice;
 	switch (choice) {
-		case 0:
+		case '0': {
 			done = true;
 			break;
-		case 1: { // braces put in to limit scope.
+		}
+		case 'q': {
+			done = true;
+			break;
+		}
+		case 'Q': {
+			done = true;
+			break;
+		}
+		case '1': { // braces put in to limit scope.
 			string sequence1, sequence2;
 			promptPhylogeneticDistanceInput(sequence1, sequence2);
 			//output it.
 			cout << "Phylogenetic sequence of \"" << sequence1 << "\" and  \"" << sequence2 << "\" is: ";
-			cout << getPhylogeneticDistance(sequence1, sequence2) << endl;
+			cout <<setprecision(2)<<getPhylogeneticDistance(sequence1, sequence2) << endl;
 			break;
 		}
-		case 2: {
+		case '2': {
 			string sequence = "", complement = "";
-			cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required." << endl << "The constraints are as follows: " << endl;
+			cout << "\nA sequence of nucleotides is said to be palindromic if its complement when read from 3' to 5' is ";
+			cout << "equal to the original sequence read from 5' to 3'" << endl;
+			cout << "Example: 5'GAATTC3' is palindromic because its complement 3'CTTAAG5'";
+			cout << "when read in reverse is the original sequence." << endl;
+			cout << "This is the recognition pattern of EcoR1, an enzyme found in E-coli.\n" << endl; // http://en.wikipedia.org/wiki/EcoR1
+			cout << "To determine if a sequence of nucleotides is palindromic, a single sequence is required.\n" << endl;
 			promptForDNASequence(sequence);
 			cout << "\nThe sequence \"" << "5'-" << sequence << "-3'\"" << " and its complement \"" << "3'-" << getComplement(
 					sequence) << "-5'" << "\" ";
-			if (isPalindromicSequence(sequence)) {
-				cout << "is palindromic." << endl;
-			} else {
-				cout << "is not palindromic." << endl;
-			}
+			cout<< (isPalindromicSequence(sequence) ? "is palindromic." : "is not palindromic.") <<endl;
 			break;
 		}
-		case 3: {
-			cout<<"You have chosen to transcribe a DNA sequence to an RNA sequence.\n"<<endl;
+		case '3': {
+			cout << "\nYou have chosen to transcribe a DNA sequence to an RNA sequence.\n" << endl;
+			cout << "Transcription is the process of creating a complementary RNA copy of a sequence of DNA." << endl;
+			cout << "A rather simplistic way to explain this: RNA has Uracil (U) where DNA has Tyrosine (T).\n" << endl;
 			string sequence = "";
 			promptForDNASequence(sequence);
 			RNATranscriber transcriber(sequence);
 			transcriber.transcribe();
-			cout<<"\n\nThe DNA Sequence \""<<sequence<<"\" transcribed to RNA is \""<<transcriber.getRNASequence()<<".\""<<endl;
+			cout << "\n\nThe DNA Sequence \"" << sequence << "\" transcribed to RNA is \"" << transcriber.getRNASequence() << ".\"" << endl;
 			break;
 		}
-		case 4: {
-			cout<<"\nAmino Acids will be extracted from an RNA sequence that will be transcribed from a DNA sequence entered.\n"<<endl;
-			cout<<"It will display: it in the following format: "<<endl;
-			cout<<"Protein name: Methionine (Met)"<<endl;
-			cout<<"Molar mass: 149.21"<<endl;
-			cout<<"The sequence you entered is encoded as: Met-Val-Tyr-Gly-Leu\n\n"<<endl;
+		case '4': {
+			cout << "\nAmino Acids will be extracted from an RNA sequence that will be transcribed from a DNA sequence entered.\n" << endl;
+			cout << "It will display information on each amino acid encoded by the sequence and its molar mass.\n" << endl;
+			cout << "It will also print the protein sequence.\n" << endl;
 			string sequence = "";
 			promptForDNASequence(sequence);
 			RNATranscriber transcriber(sequence);
@@ -88,7 +97,7 @@ void displayMenu(bool& done) {
 			break;
 		}
 		default: {
-			cout << "Invalid input! please choose only numbers between 0 and 4! " << endl;
+			cout << "\nInvalid input! please choose only numbers between 0 and 4! " << endl;
 			cout << "Please make a selection: ";
 			cin >> choice;
 			break;
@@ -97,7 +106,7 @@ void displayMenu(bool& done) {
 }
 
 void promptForDNASequence(string &sequence) {
-	cout<<"Ensure that your DNA sequence follows the following rules:"<<endl;
+	cout << "Ensure that your DNA sequence follows the following rules:" << endl;
 	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)." << endl;
 	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n" << endl;
 	cout << "Please enter the DNA sequence (no spaces, all on one line): ";
@@ -111,7 +120,6 @@ bool isPalindromicSequence(string sequence) {
 	string reversed(sequence.rbegin(), sequence.rend()); // reversed sequence
 	return complement == reversed;
 }
-
 
 string getComplement(string sequence) {
 	string complement = sequence;
@@ -139,10 +147,12 @@ string getComplement(string sequence) {
 }
 
 void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
-	cout << "\nTo calculate the phylogentic distance, you will be required" << " to enter two DNA sequences." << endl << "The constraints are as follows: " << endl;
-	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).\n\n" << endl;
-	cout << "2. Its length must be a multiple of three and 30 characters or less.\n\n" << endl;
-
+	cout << "\nThe phylogenetic distance of two sequences is the number of places the two sequences differ divided by the length.\n" << endl;
+	cout << "To calculate the phylogentic distance, you will be required" << " to enter two DNA sequences.\n" << endl;
+	cout << "The constraints are as follows: " << endl;
+	cout << "1. The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts)." << endl;
+	cout << "2. Its length must be a multiple of three and 30 characters or less." << endl;
+	cout << "3. The two sequences must be of equal length." << endl;
 	cout << "Please enter the first sequemce (with no spaces and all on one line): ";
 	cin >> sequence1;
 	// first sequence validation.
@@ -163,7 +173,7 @@ void promptPhylogeneticDistanceInput(string &sequence1, string &sequence2) {
 	}
 }
 
-int getPhylogeneticDistance(string dnaSequence1, string dnaSequence2) {
+double getPhylogeneticDistance(string dnaSequence1, string dnaSequence2) {
 	int numDifferent = 0; // this will increment as we find different values.
 
 	// squashes the warning: "comparison between signed and unsigned integer expressions"
@@ -177,9 +187,8 @@ int getPhylogeneticDistance(string dnaSequence1, string dnaSequence2) {
 			numDifferent++;
 		}
 	}
-	return numDifferent / dnaSequence1.size();
+	return numDifferent / (double)dnaSequence1.size(); // prevent integer division...cast denominator to double.
 }
-
 
 bool isValidDNASequence(string sequence) {
 	// squashes the warning: "comparison between signed and unsigned integer expressions"
@@ -201,27 +210,26 @@ bool isValidDNASequence(string sequence) {
 	return true;
 }
 
-
 void validateDNASequence(string &dnaSequence) {
 	// allows for me to more precisely determine what isn't valid.
 	bool tooBig = dnaSequence.size() > 30;
 	bool invalidDNA = !isValidDNASequence(dnaSequence);
 	bool isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 	while (tooBig || invalidDNA || isNotMultipleOfThree) {
-		if (tooBig && invalidDNA && isNotMultipleOfThree) {
-			printMessage("The sequence must be 30 letters or less.");
-			printMessage(
+		if (tooBig && invalidDNA && isNotMultipleOfThree) { // everything is wrong!!!
+			printErrorMessage("The sequence must be 30 letters or less.");
+			printErrorMessage(
 					"The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).");
-			printMessage(
+			printErrorMessage(
 					"The sequence must be a multiple of three (e.g., groups of 3 letters (no spaces)) and 30 letters or less.");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
 			tooBig = dnaSequence.size() > 30;
 			invalidDNA = !isValidDNASequence(dnaSequence);
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
-		} else if ((tooBig & invalidDNA)) { // compound cases.
-			printMessage("The sequence must be 30 letters or less.");
-			printMessage(
+		} else if ((tooBig & invalidDNA)) { // compound cases
+			printErrorMessage("The sequence must be 30 letters or less.");
+			printErrorMessage(
 					"The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
@@ -229,8 +237,8 @@ void validateDNASequence(string &dnaSequence) {
 			invalidDNA = !isValidDNASequence(dnaSequence);
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 		} else if (tooBig && isNotMultipleOfThree) {
-			printMessage("The sequence must be 30 letters or less.");
-			printMessage(
+			printErrorMessage("The sequence must be 30 letters or less.");
+			printErrorMessage(
 					"The sequence must be a multiple of three (e.g., groups of 3 letters (no spaces)).");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
@@ -238,9 +246,9 @@ void validateDNASequence(string &dnaSequence) {
 			invalidDNA = !isValidDNASequence(dnaSequence);
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 		} else if (isNotMultipleOfThree && invalidDNA) {
-			printMessage(
+			printErrorMessage(
 					"The sequence must be a multiple of three (e.g., groups of 3 letters (no spaces)).");
-			printMessage(
+			printErrorMessage(
 					"The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
@@ -248,7 +256,7 @@ void validateDNASequence(string &dnaSequence) {
 			invalidDNA = !isValidDNASequence(dnaSequence);
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 		} else if (tooBig) { // singular cases now...
-			printMessage("The sequence must be 30 letters or less.");
+			printErrorMessage("The sequence must be 30 letters or less.");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
 			//reset the bools.
@@ -256,7 +264,7 @@ void validateDNASequence(string &dnaSequence) {
 			invalidDNA = !isValidDNASequence(dnaSequence);
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 		} else if (isNotMultipleOfThree) {
-			printMessage(
+			printErrorMessage(
 					"The sequence you enter must be a multiple of 3 (e.g., must be groups of 3).");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
@@ -264,7 +272,7 @@ void validateDNASequence(string &dnaSequence) {
 			tooBig = dnaSequence.size() > 30;
 			isNotMultipleOfThree = dnaSequence.size() % 3 != 0;
 		} else if (invalidDNA) {
-			printMessage(
+			printErrorMessage(
 					"The sequence must contain only the letters \'a\', \'c\', \'g\' or \'t\' (or their upper-case counterparts).");
 			cout << "Please re-enter the sequence: ";
 			cin >> dnaSequence;
@@ -279,7 +287,7 @@ void validateDNASequence(string &dnaSequence) {
 	return;
 }
 
-void printMessage(string err) {
-	cout << err << endl;
+void printErrorMessage(string error) {
+	cout << error << endl;
 	return;
 }

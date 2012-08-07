@@ -40,7 +40,7 @@ void validateDNASequence(std::string &sequence);
  * Used by validateDNASequence().
  * @param err the error message to print.
  */
-void printMessage(std::string err);
+void printErrorMessage(std::string err);
 
 /**
  * Prompt for phylogenetic distance.
@@ -59,7 +59,7 @@ void promptPhylogeneticDistanceInput(std::string &sequence1, std::string &sequen
  * @param dnaSequence2 the second sequence
  * @return -1 if not equal or the the phylogenetic distance of the two sequences.
  */
-int getPhylogeneticDistance(std::string dnaSequence1, std::string dnaSequence2);
+double getPhylogeneticDistance(std::string dnaSequence1, std::string dnaSequence2);
 
 /**
  * Prompt for DNA sequence.

@@ -10,6 +10,7 @@ associating and printing out the associated amino acid.
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include "AminoAcid.h"
 #include "RNATranscriber.h"
@@ -47,7 +48,7 @@ class RNATranslator{
 
   private:
 
-    RNATranscriber transcriber;
+    RNATranscriber transcriber; // not exposed.
 
     /**
      * Allows for easy lookup of amino acids given a

@@ -7,6 +7,7 @@
  *******************************************************************************/
 #include "RNATranslator.h"
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -46,35 +47,37 @@ vector<string> RNATranslator::processSequence() {
 }
 
 void RNATranslator::printAminoAcids(vector<string> codons) {
-	string sequence;
+	string sequence; // final protein sequence
+	cout<<left;
 	cout << "The following proteins are encoded by the RNA sequence you entered:\n" << endl;
-	for(int i = 0;i < codons.size();i++) {
+	int i = 0;
+	int size = codons.size();
+	for(;i<size;i++) {
 		string codon = codons[i];
 		// check if iter exists first.
 		map<string, AminoAcid>::iterator iter = this->aminoAcidsMap.find(codon);
 		if (iter != this->aminoAcidsMap.end()) {
 			// okay it exists...this now returns a pair<string,AminoAcid>.
 			AminoAcid acid = iter->second;
-			cout << "Amino acid name: " << acid.getName() << " (" << acid.getThreeLetterName() << ")" << endl;
-			cout << "Molar Mass of " << acid.getThreeLetterName() << ": " << acid.getMolarMass() << " g/mol\n" << endl;
-			sequence += acid.getThreeLetterName() + "-";
+			cout<<"Amino acid name: "<<acid.getName()<<" ("<<acid.getThreeLetterName()<<"); "<<"Molar Mass: "<<acid.getMolarMass()<<"."<<endl;
+			sequence.append(acid.getThreeLetterName()).append("-");
 		} else {
 			cout << "***Stop Codon encountered***" << endl;
 
 		}
 	}
-	sequence.replace(sequence.size() - 1, sequence.size(), ""); // remove the trailing "-" from the sequence.
-	cout << "The sequence you entered is encoded as: " << sequence << endl;
+	// remove the trailing dash and print sequence.
+	cout << "The following protein sequence has been translated: " << sequence.replace(sequence.size() - 1, sequence.size(), "") << endl;
 }
 
 bool RNATranslator::processInputFile(const std::string fileName) {
 	ifstream input(fileName.c_str());
-	string longName, threeLetterName, trash;
-	double molarMass;
-	vector<string> codons;
+	string longName; // full name
+	string threeLetterName; // abbrev.
+	string trash; // used to simply skip over tokens...
+	double molarMass; // the molecular mass.
 	if (input.is_open()) {
 		while (input.good()) {
-			codons.clear(); // clear it...only want codons for that Amino acid..
 			input >> longName; // grab the first line since it is known  that it's the name wanted..
 			input >> threeLetterName >> threeLetterName >> threeLetterName;
 			input >> trash >> trash >> molarMass;
@@ -84,14 +87,14 @@ bool RNATranslator::processInputFile(const std::string fileName) {
 			line.replace(0, 9, ""); // get rid of "Codons: " (note the white space).
 			stringstream ss(line);
 			string token;
-			while (ss >> token) {
-				codons.push_back(token); // push it onto the vector
-			}
-			AminoAcid acid(longName, threeLetterName, molarMass, codons);
-			// iterate through the codons array and add them to map which will be used for lookups.
-			// codon information is still stored in the AminoAcid class but this provides an easier way to get data.
-			for(vector<string>::iterator iter = codons.begin();iter < codons.end();iter++) {
-				this->aminoAcidsMap.insert(pair<string, AminoAcid>(*iter, acid));
+			/* Since the codons vector was not being used -- I opted to remove it.
+			 * Instead the codons are in the map which allows for easy lookup.
+			 * This has the added bonus of removing the need to iterate *AGAIN* to
+			 * find the codons. Performance bonus I guess? Even if it is premature optimization...
+			 */
+			AminoAcid acid(longName, threeLetterName, molarMass);
+			while (ss >> token) { // tokenize using stringstream...
+				this->aminoAcidsMap.insert(make_pair(token, acid)); // codon->AminoAcid  mapping
 			}
 		}
 	} else {

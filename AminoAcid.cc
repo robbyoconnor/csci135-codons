@@ -7,7 +7,7 @@ Modifications:
 *******************************************************************************/
 #include "AminoAcid.h"
 #include <string>
-#include <iostream>
+
 using namespace std;
 
 
@@ -15,9 +15,8 @@ AminoAcid::AminoAcid(){
     // do nothing.
 }
 
-AminoAcid::AminoAcid(const string name, const string threeLetterName, const double molarMass, const vector<string> codons):
-		name(name),threeLetterName(threeLetterName),
-		molarMass(molarMass),codons(codons){
+AminoAcid::AminoAcid(const string name, const string threeLetterName, const double molarMass):
+		name(name),threeLetterName(threeLetterName), molarMass(molarMass) {
 	// this page left blank intentionally.
 }
 
@@ -41,14 +40,6 @@ double AminoAcid::getMolarMass() {
     return this->molarMass;
 }
 
-void AminoAcid::getMolarMass(const double molarMass) {
+void AminoAcid::setMolarMass(const double molarMass) {
     this->molarMass = molarMass;
-}
-
-vector<string> AminoAcid::getCodons() {
-    return this->codons;
-}
-
-void AminoAcid::setCodons(const vector<string> codons) {
-    this->codons = codons;
 }

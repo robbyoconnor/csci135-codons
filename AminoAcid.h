@@ -7,7 +7,6 @@ Description: Represents an Amino Acid
 #ifndef AMINOACID_H
 #define	AMINOACID_H
 #include <string>
-#include <vector>
 
 class AminoAcid{
   public:
@@ -15,7 +14,7 @@ class AminoAcid{
     AminoAcid();
 
     // allows for easy initialization of all class members
-    AminoAcid(const std::string name, const std::string threeLetterName, const double molarMass, const std::vector<std::string> codons);
+    AminoAcid(const std::string name, const std::string threeLetterName, const double molarMass);
 
     // accessor functions
 
@@ -37,12 +36,6 @@ class AminoAcid{
      */
     double getMolarMass();
 
-    /**
-     * Returns a vector containing the codon(s) for this amino acid.
-     * @return a vector containing the amino acid.
-     */
-    std::vector<std::string> getCodons();
-
     //mutator functions
 
     /**
@@ -61,19 +54,12 @@ class AminoAcid{
      * Sets the molar mass.
      * Units: g/mol     *
      */
-    void getMolarMass(const double molarMass);
-
-    /**
-     * Set the codon(s) for the amino acid
-     * @param codons the codons for this amino acid.
-     */
-    void setCodons(const std::vector<std::string> codons);
+    void setMolarMass(const double molarMass);
 
   private:
     std::string name;
     std::string threeLetterName;
     double molarMass;
-    std::vector<std::string> codons;
 
 };
 #endif
